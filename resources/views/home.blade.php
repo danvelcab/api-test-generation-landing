@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -11,11 +12,6 @@
                     @if(count($repositories) == 0)
                         <div class="text-center">
                             Configure your first project and start working with API Test Generator
-                        </div>
-                        <div class="text-center" style="margin-top: 15px">
-                            <a href="{{URL::asset('repositories/create')}}">
-                                <button class="btn btn-primary">Configure</button>
-                            </a>
                         </div>
                     @endif
                     @foreach($repositories as $repository)
@@ -36,7 +32,7 @@
 
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
-                                            <a href="{{URL::asset('repositories/generateParamsFile') . '/' . $repository->id}}">Generate params file</a>
+                                            <a onclick="generateParamsFile({{$repository->id}})">Generate params file</a>
                                         </li>
                                         <li>
                                             @if($repository->params_file_path != null)
@@ -45,7 +41,7 @@
                                         </li>
                                         <li>
                                             @if($repository->params_file_path != null)
-                                                <a href="{{URL::asset('repositories/generateTests') . '/' . $repository->id}}">Generate tests</a>
+                                                <a onclick="generateTest({{$repository->id}})">Generate tests</a>
                                             @else
                                                 <a class="a-disabled">Generate tests</a>
                                             @endif
@@ -64,14 +60,29 @@
                             <hr noshade="noshade" />
                         </div>
                     @endforeach
-                    @if(count($repositories) == 1)
+                    @if(count($repositories) > 0 && Auth::user()->admin == 0)
                         <div class="alert-warning col-md-12">
                             API Test Generator is still in beta. At the moment, you can only create one project per account
+                        </div>
+                    @else
+                        <div class="text-center" style="margin-top: 15px">
+                            <a href="{{URL::asset('repositories/create')}}">
+                                <button class="btn btn-primary">Configure new project</button>
+                            </a>
                         </div>
                     @endif
                 </div>
             </div>
         </div>
+    </div>
+    <div class="jumbotron col-md-8 col-md-offset-2">
+        <h3>What to do?</h3>
+        <p>Step 1: Configure a project</p>
+        <p>Step 2: Generate a parameter file in "Action > Generate params file"</p>
+        <p>Step 3: Fill the parameter file</p>
+        <p>Step 4: Upload the file in "Action > Upload params file"</p>
+        <p>Step 5: Generate the test files in "Action > Generate tests"</p>
+        <p>Step 6: Copy the tests in test folder and execute the tests</p>
     </div>
 </div>
 <div class="modal fade" tabindex="-1" role="dialog" id="upload-file-modal">
@@ -95,6 +106,9 @@
                             <span class="help-block">
                                         <strong>{{ $errors->first('params_file') }}</strong>
                                     </span>
+                            <script>
+                                $('#upload-file-modal').modal('show');
+                            </script>
                         @endif
                     </div>
 
@@ -111,11 +125,34 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <script>
-    function openUploadModal(id){
+
+    function openUploadModal(repository_id){
         var form = $('#upload-form');
-        var newAction = "http://localhost/api-test-generation-landing/public/repositories/upload-params-file/" + id;
+        var newAction = "http://localhost/api-test-generation-landing/public/repositories/upload-params-file/" + repository_id;
         form.attr('action', newAction);
         $('#upload-file-modal').modal('show')
     }
+    function generateParamsFile(repository_id){
+        notificarWarning("{{Lang::get('repositories')['repository_generate_params_file_wait']}}");
+        window.location.href = "{{URL::asset('repositories/generateParamsFile') . '/'}}" + repository_id;
+    }
+    function generateTest(repository_id) {
+        notificarWarning("{{Lang::get('repositories')['repository_generate_test_wait']}}");
+        window.location.href = "{{URL::asset('repositories/generateTests') . '/'}}" + repository_id
+    }
+    @if(Session::has('download.params.file'))
+        window.location.href = 'repositories/download-params-file/' + {{Session::get('download.params.file')}}
+        var timer = window.setTimeout(function(){
+            window.location.reload();
+            clearTimeout(timer);
+        }, 2000);
+    @endif
+    @if(Session::has('download.tests'))
+        window.location.href = 'repositories/download-tests/' + {{Session::get('download.tests')}};
+        var timer = window.setTimeout(function(){
+            window.location.reload();
+            clearTimeout(timer);
+        }, 2000);
+    @endif
 </script>
 @endsection

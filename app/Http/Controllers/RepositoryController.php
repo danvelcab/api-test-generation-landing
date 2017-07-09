@@ -11,6 +11,8 @@ use Chumper\Zipper\Zipper;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Session;
 
 class RepositoryController extends Controller
 {
@@ -30,7 +32,7 @@ class RepositoryController extends Controller
         $repository->user_id = $user->id;
         $repository->private = 0;
         $repository->save();
-        return redirect('/home');
+        return redirect('/home')->with(['message' => Lang::get('repositories')['repository_saved']]);
     }
     public function edit($repository_id){
         $repository = Repository::find($repository_id);
@@ -44,12 +46,13 @@ class RepositoryController extends Controller
         $repository->url = $createRepositoryFormRequest->get('url');
         $repository->folder = $createRepositoryFormRequest->get('folder');
         $repository->save();
-        return redirect('/home');
+        return redirect('/home')->with(['message' => Lang::get('repositories')['repository_updated']]);
     }
     public function delete($repository_id){
         $repository = Repository::find($repository_id);
         $repository->delete();
-        return redirect('/home');
+        return redirect('/home')
+            ->with(['message' => Lang::get('repositories')['repository_deleted']]);
     }
     public function generateParamsFile($repository_id){
         $repo = \App\Repository::find($repository_id);
@@ -64,14 +67,24 @@ class RepositoryController extends Controller
         );
         $repo->params_file_path = 'files/' . $name;
         $repo->save();
-        return response()->download(storage_path() . '/app/files/' . $name);
+        Session::flash('download.params.file', $repo->id);
+        exec("cd ..");
+        exec("cd ..");
+        exec("RD /S /Q /" . $repo->id);
+        return redirect('/home')
+            ->with(['message' => Lang::get('repositories')['repository_generate_params_file']]);
+    }
+    public function downloadParamsFile($repository_id) {
+        $repository = Repository::find($repository_id);
+        return response()
+            ->download(storage_path() . '/app/' . $repository->params_file_path);
     }
     public function uploadParamsFile(UploadFileFormRequest $request, $repository_id){
         $path = $request->params_file->store('files');
         $repo = Repository::find($repository_id);
         $repo->params_file_path = $path;
         $repo->save();
-        return redirect('home');
+        return redirect('home')->with(['message' => Lang::get('repositories')['repository_upload_params_file']]);
     }
     public function generateTests($repository_id){
         $repo = \App\Repository::find($repository_id);
@@ -87,7 +100,14 @@ class RepositoryController extends Controller
         $zipper = new \Chumper\Zipper\Zipper;
         $files = glob(app_path() . '/../storage/repositories/' . $repo->id . '/' . $repo->folder . '/tests/Controller/*');
         $zipper->make(app_path() . '/../storage/repositories/' . $repo->id . '/' . $repo->folder . '/tests/Controller.zip')->add($files)->close();
-        return response()->download(app_path() . '/../storage/repositories/' . $repo->id . '/' . $repo->folder . '/tests/Controller.zip')->deleteFileAfterSend(true);
+        Session::flash('download.tests', $repo->id);
+        return redirect('/home')
+            ->with(['message' => Lang::get('repositories')['repository_generate_test']]);
+    }
+    public function downloadTests($repository_id) {
+        $repository = Repository::find($repository_id);
+        return response()
+            ->download(app_path() . '/../storage/repositories/' . $repository->id . '/' . $repository->folder . '/tests/Controller.zip');
     }
 
 }

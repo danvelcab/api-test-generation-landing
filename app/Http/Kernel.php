@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\BetaLimit;
 use App\Http\Middleware\MyRepository;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -57,6 +58,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'myRepository' => MyRepository::class
+        'myRepository' => MyRepository::class,
+        'betaLimit' => BetaLimit::class
     ];
 }

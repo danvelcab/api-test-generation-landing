@@ -20,3 +20,29 @@ Vue.component('example', require('./components/Example.vue'));
 const app = new Vue({
     el: '#app'
 });
+
+
+function notificarError(message){
+    new Noty({
+        timeout: 5000,
+        type: 'error',
+        layout: 'topCenter',
+        text: message,
+    }).show();
+}
+function notificarSuccess(message){
+    new Noty({
+        timeout: 5000,
+        type: 'success',
+        layout: 'topCenter',
+        text: message,
+    }).show();
+}
+function notificarWarning(message){
+    new Noty({
+        timeout: 10000,
+        type: 'info',
+        layout: 'topCenter',
+        text: message,
+    }).show()
+}

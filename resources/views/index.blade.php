@@ -115,7 +115,7 @@
                                 <h1 class="fh5co-lead to-animate">Laravel API Testing</h1>
                                 <h2 class="fh5co-sub-lead to-animate">
                                     Automatic test generation for APIs developed in Laravel</h2>
-                                    <p class="to-animate-2"><a href="#" class="btn btn-primary btn-lg">Get started</a></p>
+                                    <p class="to-animate-2"><a href="{{URL::asset('/home')}}" class="btn btn-primary btn-lg">Get started</a></p>
                             </div>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
                             <div class="fh5co-owl-text">
                                 <h1 class="fh5co-lead to-animate">Free for a limited time</h1>
                                 <h2 class="fh5co-sub-lead to-animate">You still have time to get a free API Test Generator license</h2>
-                                    <p class="to-animate-2"><a href="#" class="btn btn-primary btn-lg">Get started</a></p>
+                                    <p class="to-animate-2"><a href="{{URL::asset('/home')}}" class="btn btn-primary btn-lg">Get started</a></p>
                             </div>
                         </div>
                     </div>
@@ -283,7 +283,7 @@
                         <li>Unlimitted executions</li>
                         <li>1 year licence</li>
                     </ul>
-                    <a href="#" class="btn btn-default btn-sm">Get started</a>
+                    <a href="{{URL::asset('/home')}}" class="btn btn-default btn-sm">Get started</a>
                 </div>
             </div>
             <div class="col-md-4 col-sm-6">
@@ -297,7 +297,7 @@
                         <li>For projects of up to 25 services</li>
                         <li>20 executions per day</li>
                     </ul>
-                    <a href="#" class="btn btn-default btn-sm">Get started</a>
+                    <a href="{{URL::asset('/home')}}" class="btn btn-default btn-sm">Get started</a>
                 </div>
             </div>
             <div class="col-md-4 col-sm-6 to-animate">
@@ -312,7 +312,7 @@
                         <li>100 Emails</li>
                         <li>700 Images</li>
                     </ul>
-                    <a href="#" class="btn btn-primary btn-sm">Get started</a>
+                    <a href="{{URL::asset('/home')}}" class="btn btn-primary btn-sm">Get started</a>
                 </div>
             </div>
         </div>

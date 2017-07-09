@@ -17,6 +17,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- jQuery -->
     <script src="{{asset('js/jquery.min.js')}}"></script>
+    <link href="{{asset('plugins/noty/noty.css')}}" rel="stylesheet">
+    <script src="{{asset('plugins/noty/noty.js')}}" type="text/javascript"></script>
 
 </head>
 <body>
@@ -24,6 +26,7 @@
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
+                    @include('alertMessages')
 
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
@@ -35,7 +38,7 @@
 
                     <!-- Branding Image -->
                     <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-                    <a class="navbar-brand" href="index.html">API Test Generator</a><span>Beta</span>
+                    <a class="navbar-brand" href="{{URL::asset('/')}}">API Test Generator</a><span>Beta</span>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">

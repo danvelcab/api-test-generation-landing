@@ -11,7 +11,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 
-class MyRepository
+class BetaLimit
 {
     /**
      * Handle an incoming request.
@@ -23,16 +23,10 @@ class MyRepository
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
-        $repository_id = $request->route('repository_id');
-        $repository = Repository::find($repository_id);
-        if($repository == null){
+        $repositories = Repository::all();
+        if(count($repositories) > 0 && !$user->admin){
             return redirect()->back()->with([
-                'error' => 'The project with id ' . $repository_id . ' does not exists'
-            ]);
-        }
-        if($repository->user_id != $user->id){
-            return redirect()->back()->with([
-                'error' => 'You have not permissions for this operation'
+                'error' => 'API Test Generator is still in beta. At the moment, you can only create one project per account'
             ]);
         }
         return $next($request);

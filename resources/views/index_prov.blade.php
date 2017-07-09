@@ -113,7 +113,7 @@
                                 <h2 class="fh5co-sub-lead to-animate">
                                     Automatic test generation for APIs developed in Laravel</h2>
                                     <p class="to-animate-2">API Test Generator creates a set of tests that will guarantee the quality and efficiency of your code. In just 3 steps you can make use of this powerful tool that will reduce the cost of the testing stage with impressive results</p>
-                                    <p class="to-animate-2"><a href="#" class="btn btn-primary btn-lg">Get started</a></p>
+                                    <p class="to-animate-2"><a href="{{URL::asset('/register')}}" class="btn btn-primary btn-lg">Get started</a></p>
                             </div>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
                                 <h1 class="fh5co-lead to-animate">Free for a limited time</h1>
                                 <h2 class="fh5co-sub-lead to-animate">You still have time to get a free API Test Generator license</h2>
                                     <p class="to-animate-2">We want to thank all the users who have tried the beta version with a license of one year of this tool with each and every one of its characteristics.</p>
-                                    <p class="to-animate-2"><a href="#" class="btn btn-primary btn-lg">Get started</a></p>
+                                    <p class="to-animate-2"><a href="{{URL::asset('/register')}}" class="btn btn-primary btn-lg">Get started</a></p>
                             </div>
                         </div>
                     </div>

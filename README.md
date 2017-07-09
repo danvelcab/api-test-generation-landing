@@ -56,6 +56,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
  - Subida de fichero params [X]
  - Descarga de test [X]
  - Borrados de repositorio []
- - Loader []
+ - Pasos de ayuda [X]
+ - Loader [X]
  - Enlaces de redes sociales []
- - Subida al servidor
+ - Subida al servidor []
+ - Enlace desde la landing a la aplicación web [X]
