@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c56bc113c3ec77152b380e7182627a00",
+    "content-hash": "57a3b755222c69d9d3859f794d95da6a",
     "packages": [
         {
             "name": "chumper/zipper",
@@ -681,6 +681,40 @@
                 "schedule"
             ],
             "time": "2017-01-23T04:29:33+00:00"
+        },
+        {
+            "name": "needim/noty",
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/needim/noty.git",
+                "reference": "846c376471e26ee9a2cf3ff223ca3600d987d2e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/needim/noty/zipball/846c376471e26ee9a2cf3ff223ca3600d987d2e4",
+                "reference": "846c376471e26ee9a2cf3ff223ca3600d987d2e4",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nedim Arabaci",
+                    "homepage": "http://ned.im",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Noty is a library that makes it easy to create alert - success - error - warning - information - confirmation messages as an alternative the standard alert dialog.",
+            "homepage": "http://ned.im/noty",
+            "keywords": [
+                "notification",
+                "noty"
+            ],
+            "time": "2017-04-26T05:08:22+00:00"
         },
         {
             "name": "nesbot/carbon",

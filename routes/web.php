@@ -27,10 +27,15 @@ Route::prefix('repositories')->group(function () {
         Route::get('/edit/{repository_id}', 'RepositoryController@edit');
         Route::post('/update/{repository_id}', 'RepositoryController@update');
         Route::get('/delete/{repository_id}', 'RepositoryController@delete');
-        Route::get('/generateParamsFile/{repository_id}', 'RepositoryController@generateParamsFile');
+        Route::get('/generate-specifications-file/{repository_id}', 'RepositoryController@generateSpecificationsFile');
+        Route::get('/download-specifications-file/{repository_id}', 'RepositoryController@downloadSpecificationsFile');
+        Route::post('/upload-specifications-file/{repository_id}', 'RepositoryController@uploadSpecificationsFile');
+
+        Route::get('/generate-params-file/{repository_id}', 'RepositoryController@generateParamsFile');
         Route::get('/download-params-file/{repository_id}', 'RepositoryController@downloadParamsFile');
-        Route::get('/generateTests/{repository_id}', 'RepositoryController@generateTests');
         Route::post('/upload-params-file/{repository_id}', 'RepositoryController@uploadParamsFile');
+
+        Route::get('/generate-tests/{repository_id}', 'RepositoryController@generateTests');
         Route::get('/download-tests/{repository_id}', 'RepositoryController@downloadTests');
     });
 });

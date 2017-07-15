@@ -16,7 +16,8 @@ class CreateRepositoriesTable extends Migration {
 			$table->integer('user_id')->unsigned();
 			$table->text('folder');
             $table->text('params-file-path');
-		});
+            $table->text('specifications-file-path');
+        });
 	}
 
 	public function down()

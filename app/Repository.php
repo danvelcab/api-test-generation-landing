@@ -31,6 +31,10 @@ class Repository extends Model
             app_path() . '/../dist/TestGeneration.php',
             app_path() . '/../storage/repositories/' . $repo->id . '/' . $repo->folder . '/app/Console/Commands/TestGeneration.php'
         );
+        copy(
+            app_path() . '/../dist/TestExtractSpecifications.php',
+            app_path() . '/../storage/repositories/' . $repo->id . '/' . $repo->folder . '/app/Console/Commands/TestExtractSpecifications.php'
+        );
 
         chdir(app_path() . '/../storage/repositories/' . $repo->id . '/' . $repo->folder);
         exec('composer update');
@@ -45,8 +49,8 @@ class Repository extends Model
         if($kernel === false){
             // TODO - Lanzar excepción
         }
-        $import = 'use App\Console\Commands\TestExtractParameters; use App\Console\Commands\TestGeneration;';
-        $commands = 'TestGeneration::class, TestExtractParameters::class';
+        $import = 'use App\Console\Commands\TestExtractParameters; use App\Console\Commands\TestGeneration;use App\Console\Commands\TestExtractSpecifications;';
+        $commands = 'TestGeneration::class, TestExtractParameters::class, TestExtractSpecifications::class';
         $kernel_content = file_get_contents($kernel);
         $kernel_content_exploded = explode("\r", $kernel_content);
         foreach ($kernel_content_exploded as $key => $line){
@@ -72,6 +76,11 @@ class Repository extends Model
             $new_kernel_content .= $line . "\r";
         }
         file_put_contents($kernel, $new_kernel_content);
+    }
+    public static function removeRepository($repo){
+        chdir(app_path() . '/../storage/repositories');
+        exec("RD /S /Q " . $repo->id);
+        chdir(base_path());
     }
 
 }
